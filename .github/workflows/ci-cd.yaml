@@ -17,7 +17,7 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      - name: Run script:
+      - name: Run script
         run: |
           echo "Running CI script..."
           ./linux/scripts/net_probes.sh
