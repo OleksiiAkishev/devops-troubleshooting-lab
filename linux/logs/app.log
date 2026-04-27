@@ -1,0 +1,7 @@
+2026-04-20 10:00:01 INFO user=123 action=login status=success
+2026-04-20 10:00:45 ERROR user=456 action=payment_failed status=500
+2026-04-20 10:01:12 INFO user=789 action=view_item status=200
+2026-04-20 10:02:05 ERROR user=123 action=timeout status=408
+2026-04-20 10:02:30 WARN user=unknown action=unauthorized_access status=403
+2026-04-20 10:03:15 ERROR user=456 action=database_connection_lost status=503
+2026-04-20 10:04:01 INFO user=123 action=logout status=200
