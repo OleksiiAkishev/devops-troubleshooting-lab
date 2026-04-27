@@ -1,0 +1,23 @@
+name: Troubleshooting Lab CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+  workflow_dispatch:
+
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Run script:
+        run: |
+          echo "Running CI script..."
+          ./linux/scripts/net_probes.sh
