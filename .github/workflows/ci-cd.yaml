@@ -21,4 +21,4 @@ jobs:
       - name: Run script
         run: |
           echo "Running CI script..."
-          ./linux/scripts/net_probe.sh github.com
+          ./linux/scripts/net_probe.sh iausoidsaoiudisauidasdoiua
