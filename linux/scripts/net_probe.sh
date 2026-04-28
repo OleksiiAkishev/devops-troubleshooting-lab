@@ -18,15 +18,12 @@ else
     exit 0
 fi
 
-
-# can try to use dig if installed
-# Note the good approach with dig can be to use the concerned output flags, to have the exact output we want, and avoid the need to parse the output of nslookup, which can be more complex and less reliable.
-# e.x: dig +short google.com
-
-
-# if [nslooup $1 ]; then
-#     echo "The provided input is a valid URL or IP address."
-# else
-#     echo "The provided input is not a valid URL or IP address. Please check your input and try again."
-#     exit 1
-# fi
+ports=(80 443 3306)
+target_ip=$dns_check_output
+for port in "${ports[@]}"; do
+    if nc -zv $target_ip $port >/dev/null 2>&1; then
+        echo "Port $port is open on $target_ip."
+    else
+        echo "Port $port is closed on $target_ip."
+    fi
+done
