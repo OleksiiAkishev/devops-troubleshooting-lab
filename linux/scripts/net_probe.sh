@@ -28,6 +28,6 @@ for port in "${ports[@]}"; do
     fi
 done
 
-echo "HTTP status code: $(curl -sI https://${1} | head -n 1 | awk '{print $2}')"
+echo "HTTP status code: $(curl -s -o /dev/null -w "%{http_code}" --connect-timeout 5 https://google.com)"
 
 exit 0
