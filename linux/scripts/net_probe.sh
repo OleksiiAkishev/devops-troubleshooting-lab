@@ -15,7 +15,6 @@ if [ -z "$dns_check_output" ]; then
     echo "The provided input is not a valid URL or IP address. DNS resolution cannot resolve the input. Please check your input and try again."
 else
     echo "DNS resolution output: $dns_check_output"
-    exit 0
 fi
 
 ports=(80 443 1234)
@@ -30,3 +29,5 @@ for port in "${ports[@]}"; do
 done
 
 echo "HTTP status code: $(curl -sI https://${1} | head -n 1 | awk '{print $2}')"
+
+exit 0
