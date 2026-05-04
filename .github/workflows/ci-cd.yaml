@@ -11,11 +11,11 @@ on:
     inputs:
       TestHost:
         description: 'Host to run the net probe script against'
-        required: false
+        required: true
         default: 'github.com'
       InodesUsageThreshold:
         description: 'Threshold for inodes usage percentage to trigger a warning'
-        required: false
+        required: true
         default: '80'
 
 jobs:
