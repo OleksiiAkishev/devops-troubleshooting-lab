@@ -15,15 +15,19 @@ if [ -z "$dns_check_output" ]; then
     echo "The provided input is not a valid URL or IP address. DNS resolution cannot resolve the input. Please check your input and try again."
 else
     echo "DNS resolution output: $dns_check_output"
-    exit 0
 fi
 
-ports=(80 443 3306)
-target_ip=$dns_check_output
+ports=(80 443 1234)
+timeout=10
+
 for port in "${ports[@]}"; do
-    if nc -zv $target_ip $port >/dev/null 2>&1; then
-        echo "Port $port is open on $target_ip."
+    if nc -zvw $timeout $dns_check_output $port; then
+        echo "Port $port is open on $dns_check_output"
     else
-        echo "Port $port is closed on $target_ip."
+        echo "Port $port is closed on $dns_check_output"
     fi
 done
+
+echo "HTTP status code: $(curl -s -o /dev/null -w "%{http_code}" --connect-timeout 5 https://google.com)"
+
+exit 0
