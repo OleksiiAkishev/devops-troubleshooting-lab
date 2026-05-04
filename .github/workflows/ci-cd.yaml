@@ -29,8 +29,8 @@ jobs:
       - name: Run net probe script
         run: |
           echo "Running CI script..."
-          ./linux/scripts/net_probe.sh ${TestHost}
+          ./linux/scripts/net_probe.sh $TestHost
       - name: Run system health script
         run: |
           echo "Running system health check..."
-          ./linux/scripts/system_health.sh ${InodesUsageThreshold}
+          ./linux/scripts/system_health.sh $InodesUsageThreshold
