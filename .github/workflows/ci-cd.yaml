@@ -8,7 +8,15 @@ on:
     branches:
       - master
   workflow_dispatch:
-
+    inputs:
+      TestHost:
+        description: 'Host to run the net probe script against'
+        required: false
+        default: 'github.com'
+      InodesUsageThreshold:
+        description: 'Threshold for inodes usage percentage to trigger a warning'
+        required: false
+        default: '80'
 
 jobs:
   ci:
@@ -21,8 +29,8 @@ jobs:
       - name: Run net probe script
         run: |
           echo "Running CI script..."
-          ./linux/scripts/net_probe.sh github.com
+          ./linux/scripts/net_probe.sh ${TestHost}
       - name: Run system health script
         run: |
           echo "Running system health check..."
-          ./linux/scripts/system_health.sh 0
+          ./linux/scripts/system_health.sh ${InodesUsageThreshold}
