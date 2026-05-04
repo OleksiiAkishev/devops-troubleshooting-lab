@@ -18,7 +18,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Run script
+      - name: Run net probe script
         run: |
           echo "Running CI script..."
           ./linux/scripts/net_probe.sh github.com
+      - name: Run system health script
+        run: |
+          echo "Running system health check..."
+          ./linux/scripts/system_health.sh 0
