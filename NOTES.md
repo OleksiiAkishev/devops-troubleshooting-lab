@@ -66,3 +66,5 @@ Chaining them makes pipelines easier to reason about and debug.
             file → optional, many allowed
 
 3. Learned about inodes and disk full concept. 
+4. Learned file descriptors
+5. Learned Zombie process
