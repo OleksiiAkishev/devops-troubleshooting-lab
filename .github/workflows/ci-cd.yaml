@@ -26,6 +26,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Linter check
+        run: |
+          echo "Running linter..."
+          shellcheck linux/scripts/*.sh
+
       - name: Run net probe script
         run: |
           echo "Running CI script..."

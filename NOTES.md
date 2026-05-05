@@ -92,3 +92,15 @@ So, basically set -euo pipefail helps to prevent undesired continuation of the s
         cat missing.txt | grep foo
             Without pipefail: may succeed if grep runs → error hidden
             With pipefail: fails properly if cat fails
+7. Learned on default variable set
+1. :- (most common)
+${VAR:-default}
+
+👉 Uses default if VAR is:
+
+unset or
+empty ("")
+2. - (without colon)
+${VAR-default}
+
+👉 Uses default only if VAR is unset,
