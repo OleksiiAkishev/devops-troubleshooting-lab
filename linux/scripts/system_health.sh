@@ -1,4 +1,5 @@
 #!/bin/bash
+set -euo pipefail
 
 # Inodes Exhaustion Check
 white_list_inodes="tmpfs devtmpfs proc sysfs cgroup2 cgroup autofs binfmt_misc squashfs debugfs tracefs pstore"

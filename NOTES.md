@@ -68,3 +68,27 @@ Chaining them makes pipelines easier to reason about and debug.
 3. Learned about inodes and disk full concept. 
 4. Learned file descriptors
 5. Learned Zombie process
+6. Learned on set -euo pipefail
+    is a common safety setting in Bash scripts. It turns on three options that make scripts fail fast and avoid subtle bugs:
+        -e (errexit): exit immediately if any command returns a non-zero (error) status.
+        → Prevents the script from continuing after a failure.
+        -u (nounset): treat use of undefined variables as an error and exit.
+        → Catches typos or missing inputs (e.g., $foo when foo isn’t set).
+        -o pipefail: makes a pipeline (cmd1 | cmd2 | cmd3) fail if any command in it fails, not just the last one.
+        → Without this, only the exit status of the last command is checked.
+
+So, basically set -euo pipefail helps to prevent undesired continuation of the script if failed on the step, interept the process if variable is not defined or pipe is silently failed.
+    Examples:
+    1:
+        set -e
+            cp important.txt /backup/   # fails → script stops
+            rm important.txt            # never runs
+    2: 
+        -u (undefined variables)
+            echo "$PORT"
+            Without -u: prints empty string (bug hidden)
+            With -u: script exits immediately (bug visible)
+    3: 
+        cat missing.txt | grep foo
+            Without pipefail: may succeed if grep runs → error hidden
+            With pipefail: fails properly if cat fails
