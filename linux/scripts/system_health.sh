@@ -18,7 +18,7 @@ NR > 1 {
 }'
 
 # File Descriptors Leak Detection
-cat /proc/sys/fs/file-nr | awk '{ print "Current file descriptors:", $PORT, "Maximum file descriptors:", $3}'
+awk -v PORT="$PORT" '{ print "Current file descriptors:", $PORT, "Maximum file descriptors:", $3}' < /proc/sys/fs/file-nr
 
 # Zombie Processes Detection
 ps aux | awk 'NR > 1 && $8 == "Z" { print "Zombie process detected: PID", $2, "Command:", $PORT1 }'
