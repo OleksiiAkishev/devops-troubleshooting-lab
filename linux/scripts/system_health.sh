@@ -22,3 +22,12 @@ awk -v PORT="$PORT" '{ print "Current file descriptors:", $PORT, "Maximum file d
 
 # Zombie Processes Detection
 ps aux | awk 'NR > 1 && $8 == "Z" { print "Zombie process detected: PID", $2, "Command:", $PORT1 }'
+
+# Open a new process and lsof it to demonstrate file descriptors leak detection
+python3 -m http.server 8080 &
+
+PID=$!
+
+lsof -p $PID | awk 'NR > 1 {print "PID="$2, "FD="$4}'
+
+kill $PID
