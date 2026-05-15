@@ -444,3 +444,27 @@ kernel socket object
 TCP connection
    ↓
 192.168.1.10:52344 → 142.250.74.14:443
+
+9.Git conventional style patterns:
+Subject: <type>(scope?): short imperative description
+Blank line
+Body (optional): more context, motivation, and consequences. Wrap at ~72 chars.
+Blank line
+Footer (optional): BREAKING CHANGE: description and/or Refs: #123
+
+Rules
+
+Use imperative present tense (e.g., "remove", "add", "fix").
+Keep subject ≤ 50–72 chars; body lines ~72 chars.
+Scope is optional (module, file, or area). Use lowercase.
+Choose one type from common set: feat, fix, docs, style, refactor, perf, test, chore, ci, build, revert.
+Add BREAKING CHANGE: in footer only when behavior/API changes.
+Examples
+
+fix(config): remove redundant entry from config.json
+feat(auth): add refresh-token endpoint
+docs: update README with troubleshooting steps
+ci: trigger pipeline on master branch
+refactor(ci): simplify workflow job matrix
+perf: reduce memory usage in cache loader
+chore: bump github actions runner to ubuntu-22.04
