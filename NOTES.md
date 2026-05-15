@@ -1,4 +1,4 @@
-# Notes - test
+# Notes
 
 1. Create a repo a defined a structured:
     - linux/logs kubernetes/manifests cicd/scripts
@@ -39,6 +39,7 @@
                 s = substitute
                 old = pattern to find
                 new = replacement
+
             sed 's/old/new/g -> all matches per line                
 
 What does the pipe ("|") actually do? - it connects the output of the previous program to the input of the next one. Where the bash itself plays role as an orhestrator, connects them as a chain. The shell connects programs via STDIN/STDOUT using pipes; each program is unaware of the others
@@ -473,3 +474,30 @@ chore: bump github actions runner to ubuntu-22.04
 
 - Installed RH Linux 10 distribution
 - Start preparation plan
+- Learn how to create and add the ssh key to the machine and link with GitHub:
+1. Generate SSH key (authentication key)
+Use ed25519 (modern, recommended):
+ssh-keygen -t ed25519 -C "your_email@example.com"
+When prompted:
+File location → press Enter (default: ~/.ssh/id_ed25519)
+Passphrase → optional (recommended, but you can leave empty for simplicity in VM)
+This creates:
+Private key: ~/.ssh/id_ed25519 ❌ (keep secret)
+Public key: ~/.ssh/id_ed25519.pub ✔ (you upload this)
+2. Start SSH agent
+eval "$(ssh-agent -s)"
+3. Add your key to the agent
+ssh-add ~/.ssh/id_ed25519
+4. Copy your public key
+cat ~/.ssh/id_ed25519.pub
+Copy the full output (starts with ssh-ed25519 ...)
+5. Add it to GitHub
+On GitHub:
+Settings → SSH and GPG keys
+New SSH key
+Type: Authentication Key
+Paste the public key
+Save
+6. Test connection
+ssh -T git@github.com
+
