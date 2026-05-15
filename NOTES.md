@@ -468,3 +468,8 @@ ci: trigger pipeline on master branch
 refactor(ci): simplify workflow job matrix
 perf: reduce memory usage in cache loader
 chore: bump github actions runner to ubuntu-22.04
+
+10. Preparation to RHCSA
+
+- Installed RH Linux 10 distribution
+- Start preparation plan
