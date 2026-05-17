@@ -65,4 +65,43 @@ ss (Socket Statistics) replacement for netstat. Show which connections are activ
 -u	Afficher les connexions UDP
 -l	Afficher uniquement les ports en écoute (listening)
 -n	Afficher les numéros de port (pas les noms de service)
-        
+
+Ex: 
+    - run some service: python3 -m http.server 8080 &
+
+    3.2.2 check the socket statistics: ss -tulnp, -p the name of the processes are using
+        Output:
+        Netid   State    Recv-Q   Send-Q     Local Address:Port     Peer Address:Port   Process                              
+udp     UNCONN   0        0                0.0.0.0:5353          0.0.0.0:*                                           
+udp     UNCONN   0        0              127.0.0.1:323           0.0.0.0:*                                           
+udp     UNCONN   0        0                   [::]:5353             [::]:*                                           
+udp     UNCONN   0        0                  [::1]:323              [::]:*                                           
+tcp     LISTEN   0        5                0.0.0.0:8080          0.0.0.0:*       users:(("python3",pid=3630,fd=3))   
+tcp     LISTEN   0        128              0.0.0.0:22            0.0.0.0:*                                           
+tcp     LISTEN   0        4096           127.0.0.1:631           0.0.0.0:*                                           
+tcp     LISTEN   0        128                 [::]:22               [::]:*                                           
+tcp     LISTEN   0        4096               [::1]:631              [::]:*                                           
+tcp     LISTEN   0        4096                   *:9090                *:*             
+
+OR with sudo ss tulnp; to see all the users process, output:
+Netid  State   Recv-Q  Send-Q    Local Address:Port     Peer Address:Port  Process                                   
+udp    UNCONN  0       0               0.0.0.0:5353          0.0.0.0:*      users:(("avahi-daemon",pid=1131,fd=12))  
+udp    UNCONN  0       0             127.0.0.1:323           0.0.0.0:*      users:(("chronyd",pid=1167,fd=5))        
+udp    UNCONN  0       0                  [::]:5353             [::]:*      users:(("avahi-daemon",pid=1131,fd=13))  
+udp    UNCONN  0       0                 [::1]:323              [::]:*      users:(("chronyd",pid=1167,fd=6))        
+tcp    LISTEN  0       128             0.0.0.0:22            0.0.0.0:*      users:(("sshd",pid=1341,fd=7)) 
+
+    3.2.3 To see the listen/established connections: ss -tan
+Ex:
+    - run ssh process on the local machine: ssh localhost
+    - check:
+        ESTAB            0              0                              [::1]:46794                        [::1]:22
+    - OR ss -tnp, with process names
+        ESTAB    0         0                     [::1]:46794                [::1]:22        users:(("ssh",pid=3760,fd=3))
+
+    3.3 PING
+    - ping with interval: ping -i
+    - ping with the packages size: ping -s
+
+    3.4 DNS
+
