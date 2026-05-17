@@ -104,4 +104,7 @@ Ex:
     - ping with the packages size: ping -s
 
     3.4 DNS
-
+        3.4.1 Demand to resolve address to ip: nslookup <domain>
+        3.4.2 Resolutiom much detailed: dig <domain>
+        3.4.3 Check specific server: dig @<Ip_adde> <domain>
+        3.4.4 DNS local: /etc/resolv.conf
