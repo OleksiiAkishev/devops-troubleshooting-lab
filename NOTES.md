@@ -501,3 +501,23 @@ Save
 6. Test connection
 ssh -T git@github.com
 
+11. Learn on group, users creation
+- sudo groupadd <resource_name>
+- /etc/passwd for users, /etc/group for groups
+- getent <resource> name; Get entities 
+- sudo useradd -G <group_name>
+Important detail: primary vs secondary group
+    When creating a user, Linux assigns:
+        Primary group (default)
+            - usually a group with the same name as the user
+            - example: alex → primary group alex
+        Supplementary groups (-G)
+            - extra groups for permissions
+            - example: sysadmins, wheel, etc.
+- id <user_name>; check to which group a user belongs to
+Ex: uid=1001(alex) gid=1002(alex) groups=1002(alex),1001(sysadmins)
+uid = who the user is
+gid = default group
+groups = all groups (this determines permissions/access rights) 
+- /etc/shadow; place for user passwords
+ 
