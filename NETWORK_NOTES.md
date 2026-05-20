@@ -108,3 +108,41 @@ Ex:
         3.4.2 Resolutiom much detailed: dig <domain>
         3.4.3 Check specific server: dig @<Ip_adde> <domain>
         3.4.4 DNS local: /etc/resolv.conf
+    
+    3.5 CURL
+        Checks if the web server responses.
+        Ex: curl -I https://google.com
+            where -I only to download the header without complete page.
+    3.6 wget 
+        For downloading a file
+        Ex: wget https://example.com/fichier.zip
+    3.7 nc (netcat)
+        Checks if a port is opened.
+        Ex: nc -zv google.com 443
+            where, -z scan mode, just for port check no data sent, -v verbose
+
+Note: Connection refused and connection time out are different things. Where connection refusedmeans that the port is closed and time out a port is filtered (data packages are blocked)
+
+# Complete troubleshooting guide
+
+Stage 1. Verify if local machine/client/sender is ok.
+1. Check if your local machine has IP.
+    ip addr show | grep "inet"
+        Output:
+              inet 127.0.0.1/8 scope host lo
+              inet6 ::1/128 scope host noprefixroute 
+              inet 192.168.40.134/24 brd 192.168.40.255 scope global dynamic noprefixroute ens160
+              inet6 fe80::20c:29ff:fe36:b632/64 scope link noprefixroute
+2. Check your machine interface is "UP"
+    ip link show | grep -E "state UP|state DOWN"
+        Output: 
+            : ens160: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc mq state UP mode DEFAULT group default qlen 1000
+        Where used commands helps to find a complete line where specified filter was applied.
+
+3. Check gateway/router
+    ip route | grep default
+    Output: default via 192.168.40.2 dev ens160 proto dhcp src 192.168.40.134 metric 100 
+
+Stage 2. Verify network connection. 
+
+1.   
