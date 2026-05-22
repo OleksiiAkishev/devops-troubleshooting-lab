@@ -405,4 +405,6 @@ Different network addresses (`192.168.40.0` vs `192.168.48.0`) ⇒ different sub
 1.3.2 Command to calculate the network boundaries:
     ipcalc 192.168.42.4/24
     NOte: need to be installed additionally.
+    Note2: can be calculated manually also, with the "blocks methods"
+Special addresses:
 
