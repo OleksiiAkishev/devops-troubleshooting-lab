@@ -105,7 +105,9 @@ Ex:
 
     3.4 DNS
         3.4.1 Demand to resolve address to ip: nslookup <domain>
+                nslookup always resolves ONLY DNS server server/IP address. "What IP address corresponds to this domain?" Another part of the 'nslookup' may show the IP/server address of other facilities, different from DNS Server. 
         3.4.2 Resolutiom much detailed: dig <domain>
+                Same as nslookup (only DNS server), but more modern and robust.
         3.4.3 Check specific server: dig @<Ip_adde> <domain>
         3.4.4 DNS local: /etc/resolv.conf
     
@@ -139,10 +141,55 @@ Stage 1. Verify if local machine/client/sender is ok.
             : ens160: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc mq state UP mode DEFAULT group default qlen 1000
         Where used commands helps to find a complete line where specified filter was applied.
 
-3. Check gateway/router
+3. Check if have gateway/router and it has IP
     ip route | grep default
     Output: default via 192.168.40.2 dev ens160 proto dhcp src 192.168.40.134 metric 100 
 
 Stage 2. Verify network connection. 
 
-1.   
+1. Ping gateway (box)
+    ping -c 3 $(ip route | grep default | awk '{print $3}')
+    The command will automatically take the ip of the router and apply it to the ping command as an argument. 
+2. Ping via internet (IP public)
+    ping 8.8.8.8
+    If it is working, you have internet access. 
+3. Ping one of the domain names
+    ping -c google.com
+    If it is working, the DNS is working well. 
+
+Stage 3. DNS diagnostics.
+
+1. Resolve one domain name
+    nslookup google.com
+
+    You'll get ip address(s).
+    Output: 
+2. Check with one specific DNS server
+    dig google.com @8.8.8.8 +short
+
+3. Check more details
+    dig google.com
+
+Stage 4. Test the web service
+
+1. Check if port is opened (e.g., most often 443)
+    nc -zv google.com 443 
+    Check the https connection.
+
+2. SSH port 
+    nc -zv google.com 22
+    Often closed.
+3. Check the HTTPS response
+    curl -I https://www.google.com
+4. Test the api directly if can
+    curl -I https://api.github.com
+    NOte: any api can be tested. Check via postman or any other tools.
+
+Stage 5. Check what is going on your local machine
+
+1. List all ports on listening
+    ss -tuln
+2. Check the processes names
+    ss -tulnp
+3. Filter port specific
+    ss -tulpn | grep 22
