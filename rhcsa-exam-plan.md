@@ -1,6 +1,6 @@
 # RHCSA (EX200) Preparation & Portfolio Plan
 
-> **Status:** Active Plan (Week 1 Detailed)
+> **Status:** Active Plan (Weeks 1-2 Detailed)
 > **Goal:** Pass the RHCSA purely through self-study, AI-generated practical drills, and local labs. Build portfolio artifacts along the way.
 > **Philosophy:** RHCSA is 100% practical. No multiple-choice questions. You must configure, troubleshoot, and persist changes across reboots. Muscle memory is everything.
 
@@ -85,3 +85,65 @@ Set a timer for 15 minutes. Start with a fresh VM snapshot.
 - [ ] If I create a hard link, then delete the original file, does the hard link still work? Is it the same for a soft link?
 - [ ] What is the exact octal number to set read/write/execute for owner, read/execute for group, and set the SGID bit? (e.g., `chmod 2775`)
 - [ ] Can I use `grep` and `awk` together to parse the output of `ps` or `ls`?
+
+---
+
+## 4. WEEK 2: Operate Running Systems, Logs, Processes, and Boot Recovery
+
+### 4.1 Focus Brief
+This week is about controlling a running Linux system under pressure. In RHCSA, this usually means working with services, logs, processes, tuning profiles, and boot targets without breaking the machine.
+
+**Watch out for in the exam:**
+*   **Service state vs boot persistence:** Starting a service right now is not the same as enabling it at boot.
+*   **Journald vs classic log files:** You need to know where to look first and how to filter quickly.
+*   **Boot recovery tasks:** Resetting the root password or changing boot targets must be practiced on a VM snapshot, not guessed during the exam.
+
+### 4.2 Daily Practice Tasks
+
+**Task 1: Services, Logs, and Persistence**
+*   Install the `httpd` package.
+*   Start the service immediately and configure it to start automatically at boot.
+*   Use `systemctl status` and `journalctl -u httpd` to confirm the service state and recent log entries.
+*   Configure the system journal to persist across reboots.
+
+**Task 2: Processes, Priorities, and Tuning**
+*   Launch three CPU-intensive background jobs using `dd if=/dev/zero of=/dev/null`.
+*   Identify them with `ps`, `pgrep`, and `top`.
+*   Change the priority of one process using `renice` and observe the difference.
+*   Install and use `tuned`, list available profiles, check the active one, switch to the recommended profile, and verify the result.
+
+**Task 3: Boot Targets and Recovery**
+*   Check the current default target and switch the system to boot into `multi-user.target` by default.
+*   Reboot and confirm the system reaches the expected target.
+*   Practice interrupting GRUB, booting into a recovery shell, and resetting the root password.
+*   Return the system to its normal target after the exercise.
+
+### 4.3 Hands-on Artifact (for `devops-troubleshooting-lab/`)
+
+Create a **System State Drill Kit**.
+Write a script `rhcsa/week2_breakfix_setup.sh` that intentionally creates safe break/fix scenarios, and another script `rhcsa/week2_verify.sh` that confirms whether you restored the machine correctly.
+
+Suggested scenarios for the setup script:
+*   A service installed but not enabled.
+*   A service enabled but not running.
+*   Journald not configured for persistence.
+*   A CPU-intensive process left running with the wrong priority.
+*   The system default target set to the wrong mode.
+
+**Portfolio Value:** This demonstrates practical Linux operations work: not just running commands, but diagnosing runtime state, verifying persistence, and recovering a system from a broken configuration.
+
+### 4.4 Weekend Speed Drill (Mock Task)
+Set a timer for 20 minutes. Start with a fresh VM snapshot.
+1. Install `httpd`.
+2. Start and enable the service.
+3. Allow the HTTP service through the firewall if needed for your lab.
+4. Configure persistent journald storage.
+5. Start two `dd if=/dev/zero of=/dev/null` jobs in the background and lower the priority of one of them.
+6. Change the default boot target to `multi-user.target`.
+7. Reboot and verify: `httpd` is active, the journal is persistent, and the system boots into the correct target.
+
+### 4.5 Reflection (Checklist for success)
+- [ ] Do I clearly understand the difference between `systemctl start`, `systemctl enable`, and `systemctl enable --now`?
+- [ ] If a service fails to start, do I know the fastest sequence: `systemctl status`, `journalctl -xeu <service>`, then config validation?
+- [ ] Can I explain why `nice` and `renice` do not guarantee CPU time, only influence scheduler priority?
+- [ ] Could I reset the root password from GRUB on a VM without needing step-by-step notes?
