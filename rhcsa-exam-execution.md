@@ -64,3 +64,43 @@ sudo passwd alex
     When need additonal flags: 
         - passwd change: sudo chage -d 0 alex
         - info check: sudo chage -l alice
+
+# Task 3
+1. Directory creation
+    /data/shared
+
+2. Set the owner ship to the sysadmins
+chgrp sysadmins /data/shared
+
+3. Configure permission to any file inside /data/shared, automatically inherits the sysadmins group 
+chmod g+s /tmp/shared or chmod 2775 /tmp/shared
+NOte: to undo chmod g-s /tmp/shared or chmod 0755 /tmp/shared
+TO not loose your existing permissions on the directory, it maybe needed to use command as:
+chmod g+ws /tmp/shared
+
+NOte: most probably the changes won't be taken into consideration, thus you need to do via sudo only.
+
+
+3.1 Check if shared folder is open in write access to the group.
+Note: make sure that the place where non root wants to create a file (even if it is a part of the specific group) has the right access to do so. 
+Ex: namei -l /tmp/shared
+f: /tmp/shared
+dr-xr-xr-x root        root      /
+drwxrwxrwt root        sysadmins tmp
+drwxr-xr-x oleksii_ops sysadmins shared
+    Where:
+getent group sysadmins
+sysadmins:x:1001:alex
+
+The key problem that drwxr-xr-x oleksii_ops sysadmins shared has not write(w) access for the groups, the same case for the /
+NOte: namei -l /tmp/shared; Breaks the full path into components and shows permissions for each part
+3.2 Change the mode for the dedicated shared directory for sysadmins group. 
+Ex: namei -l /tmp/shared
+f: /tmp/shared
+dr-xr-xr-x root        root      /
+drwxrwxrwt root        sysadmins tmp
+drwxr-xr-x oleksii_ops sysadmins shared
+
+Then
+chmod 775 /tmp/shared
+
