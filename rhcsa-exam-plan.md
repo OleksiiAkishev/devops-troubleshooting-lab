@@ -49,9 +49,9 @@ RHCSA starts with foundational skills. If you can't redirect text, compress file
 ### 3.2 Daily Practice Tasks
 
 **Task 1: Text Processing & Archiving**
-*   Find all log messages in `/var/log` that contain the word "error" (case-insensitive) and save them to `/root/error_logs.txt`.
+*   Find all log messages in `/var/log` that contain the word "error" (case-insensitive) and save them to `/tmp/error_logs.txt`.
 *   Archive and compress the `/etc` directory using `tar` and `bzip2` into `/tmp/etc_backup.tar.bz2`.
-*   Find all files on the system with the `setuid` bit set and redirect the list to `/root/setuid_files.txt`.
+*   Find all files on the system with the `setuid` bit set and redirect the list to `/tmp/setuid_files.txt`.
 
 **Task 2: User & Group Management**
 *   Create a group called `sysadmins`.
@@ -78,7 +78,7 @@ Set a timer for 15 minutes. Start with a fresh VM snapshot.
 2. Create users `dev1` and `dev2`, assign them to `devops`.
 3. Create `/opt/project_alpha`. Group owner: `devops`. Set `setgid`.
 4. Ensure others have absolutely no access to `/opt/project_alpha`.
-5. Find all files owned by `dev1` and copy them to `/root/dev1_files/`.
+5. Find all files owned by `dev1` and copy them to `/tmp/dev1_files/`.
 6. Reboot. Verify everything still works and permissions are exactly as requested.
 
 ### 3.5 Reflection (Checklist for success)
