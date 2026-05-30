@@ -70,6 +70,10 @@ RHCSA starts with foundational skills. If you can't redirect text, compress file
 Create an **Environment Generator & Validator**. 
 Instead of just doing the tasks, write a script `rhcsa/week1_setup.sh` that *creates* a scenario for you to fix, and another script `rhcsa/week1_verify.sh` that checks if you did it right.
 
+1. Run: ./week1_setup.sh        <-- Resets everything, injects the practice files
+2. Do your manual prep work     <-- You type your chmod, chown, tar, and grep commands
+3. Run: ./week1_verify.sh       <-- Checks your work and tells you your score
+
 **Portfolio Value:** Proves you don't just know how to run commands, but you understand system state and Bash scripting well enough to audit a Linux environment.
 
 ### 3.4 Weekend Speed Drill (Mock Task)
