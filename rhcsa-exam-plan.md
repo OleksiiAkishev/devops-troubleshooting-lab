@@ -50,8 +50,8 @@ RHCSA starts with foundational skills. If you can't redirect text, compress file
 
 **Task 1: Text Processing & Archiving**
 *   Find all log messages in `/var/log` that contain the word "error" (case-insensitive) and save them to `/tmp/error_logs.txt`.
-*   Archive and compress the `/etc` directory using `tar` and `bzip2` into `/tmp/etc_backup.tar.bz2`.
-*   Find all files on the system with the `setuid` bit set and redirect the list to `/tmp/setuid_files.txt`.
+*   Archive and compress all the log files for patterns '/tmp/*_logs.txt' && '/tmp/*log.txt' using `tar` and `bzip2` into `/tmp/logs.tar.bz2`.
+*   Find all files on the system with the `setuid` bit set and redirect the list to `/tmp/all_system_setuid_files.txt`.
 
 **Task 2: User & Group Management**
 *   Create a group called `sysadmins`.
