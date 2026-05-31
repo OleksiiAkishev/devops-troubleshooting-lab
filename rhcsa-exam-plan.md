@@ -60,9 +60,9 @@ RHCSA starts with foundational skills. If you can't redirect text, compress file
 *   Force user `alex` to change their password on the next login.
 
 **Task 3: Collaborative Permissions (Very frequent exam task)**
-*   Create a directory `/data/shared`.
-*   Set the group ownership of `/data/shared` to `sysadmins`.
-*   Configure permissions so that any new file created inside `/data/shared` automatically inherits the `sysadmins` group (hint: `setgid`).
+*   Create a directory `/tmp/shared`.
+*   Set the group ownership of `/tmp/shared` to `sysadmins`.
+*   Configure permissions so that any new file created inside `/tmp/shared` automatically inherits the `sysadmins` group (hint: `setgid`).
 *   Ensure that only the owner of a file can delete it within that directory (hint: sticky bit).
 
 ### 3.3 Hands-on Artifact (for `devops-troubleshooting-lab/`)
