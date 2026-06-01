@@ -521,3 +521,70 @@ gid = default group
 groups = all groups (this determines permissions/access rights) 
 - /etc/shadow; place for user passwords
  
+------- ### Start new Linux notes ### -----------
+1. Globbing
+shopt nullglob ,
+    where it changes a setting inside the current Bash shell
+    where shopt stands for shell options, is used to view and modify Bash specific behaviour
+For example: later when
+        files=(/tmp/*_logs.txt /tmp/*.log)
+when bash performs pathname expansion (globbing), it uses the nullglob behavior.
+
+Set to true: shopt -s nullglob
+Set to false: shopt -u nullglob
+
+Globbing (pathname expansion) is a feature of the shell that runs before a command is executed. The shell looks for wildcard patterns such as *, ?, and [...], finds matching filesystem paths, and substitutes the pattern with the matching paths.
+
+You type command
+        ↓
+Bash parses it
+        ↓
+Bash performs expansions (including globbing)
+        ↓
+Bash builds final argument list
+        ↓
+Command is executed
+
+Example:
+the target folder does not have the log file:
+ ls
+Linux_Notes.md    NOTES.md   linux                    rhcsa-exam-plan.md  week1_verify.sh
+NETWORK_NOTES.md  README.md  rhcsa-exam-execution.md  week1_setup.sh
+
+then ls *.log gives:
+ls: cannot access '*.log': No such file or directory
+
+as bash cannot resolve *.log as there are no matches, then the ls literally takes *.log and we can see the error. But if we put in the command line:
+    shopt -s nullglob
+Then: ls *.log
+It outputs no errors, but the complete directory files:
+ls *.log
+Linux_Notes.md    NOTES.md   linux                    rhcsa-exam-plan.md  week1_verify.sh
+NETWORK_NOTES.md  README.md  rhcsa-exam-execution.md  week1_setup.sh
+
+why? because with the shopt -s nullglob the ls *.log --> becomes just as ls, which simply output the current directory files. 
+
+2. Inode viewer (stat)
+An inode stores metadata like:
+owner user (UID)
+owner group (GID)
+permissions (rwx bits)
+timestamps (modified, accessed, changed)
+file type (file, directory, symlink)
+size
+
+with stat we can check that inode. 
+
+Example:
+    - check the stat of the location: stat /tmp/shared
+    - check the numeric mode of the permissions: stat -c %a /tmp/shared
+    - check symbolic form: stat -c %A /tmp/shared
+
+Permissions
+%a → numeric permissions (e.g. 2755)
+%A → human-readable permissions (e.g. drwxr-sr-x)
+Ownership
+%U → username owner
+%G → group name owner
+Identity
+%n → file name
