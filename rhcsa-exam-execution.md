@@ -104,3 +104,15 @@ drwxr-xr-x oleksii_ops sysadmins shared
 Then
 chmod 775 /tmp/shared
 
+# Week 2
+
+# Task 1
+
+httpd stands for HTTP Daemon. Turns your Linux machine into a web server. Perfect tool: to manage services, firewalls, permissions.
+
+- daemon: something sits at the background
+- install command: dnf install -y httpd
+    where:
+        dnf: red hat package manager
+        -y: auto yes to all
+        httpd: the Apache HTTP Server package
