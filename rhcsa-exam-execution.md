@@ -116,3 +116,6 @@ httpd stands for HTTP Daemon. Turns your Linux machine into a web server. Perfec
         dnf: red hat package manager
         -y: auto yes to all
         httpd: the Apache HTTP Server package
+
+- verify if installed: rpm -q httpd
+- 
