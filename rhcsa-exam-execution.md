@@ -117,5 +117,39 @@ httpd stands for HTTP Daemon. Turns your Linux machine into a web server. Perfec
         -y: auto yes to all
         httpd: the Apache HTTP Server package
 
-- verify if installed: rpm -q httpd
-- 
+- verify if installed: 
+        rpm -q httpd
+- Start service immediaately and configure it to start automatically at boot: 
+        sudo systemctl enable --now httpd
+- Check if active: 
+        systemctl status httpd
+- check logs: 
+        journactl -u httpd
+- check current storage of the journal:
+        sudo journalctl --disk-usage
+  journal files maybe stored:
+        /run/log/journal or /var/log/journal
+- Configure the system journal to persist across reboots:
+        mkdir -p /var/log/journal
+        systemd-tmpfiles --create --prefix /var/log/journal
+        systemctl restart systemd-journald
+ verify: journalctl --list-boots
+
+# Task 2
+
+1. Create CPU intensive processes
+Start background jobs:
+    dd if=/dev/zero of=/dev/null &
+Verify:
+    jobs
+
+2.Find the processes
+    ps (processes status) or ps -ef
+        where e: show every process
+              f: full format listing
+2.1 Check the CPU usage of the processes:
+    ps -eo pid,pcpu,pmem,comm
+        where:
+              e: every process
+              o: output format:
+ 
