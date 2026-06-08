@@ -196,6 +196,7 @@ Stage 5. Check what is going on your local machine
 
 Module 2 
 
+
 IP private (not in used in the public internet):
 10.x.x.x, 172.16-31.x.x, 192.168.x.x (ne sortent pas sur Internet)
 
@@ -407,4 +408,8 @@ Different network addresses (`192.168.40.0` vs `192.168.48.0`) ⇒ different sub
     NOte: need to be installed additionally.
     Note2: can be calculated manually also, with the "blocks methods"
 Special addresses:
+
+# Module 3
+
+
 
